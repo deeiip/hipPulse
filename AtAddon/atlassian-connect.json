@@ -1,0 +1,36 @@
+﻿{
+    "key": "com.markwryan.hipgif",
+    "name": "HipGif",
+    "description": "Auto-insert Gifs via the /gif command! HipGif uses Giphy.com's API to translate and find a matching GIF and HipGif adds it to your conversation.",
+    "vendor": {
+        "name": "Mark Ryan",
+        "url": "http://hipgif.herokuapp.com"
+    },
+    "baseUrl": "https://hipgif.herokuapp.com",
+    "authentication": {
+        "type": "jwt"
+    },
+    "links": {
+        "self": "https://hipgif.herokuapp.com/atlassian-connect.json",
+        "homepage": "https://hipgif.herokuapp.com/atlassian-connect.json"
+    },
+    "capabilities": {
+        "hipchatApiConsumer": {
+            "scopes": [
+                "send_notification"
+            ]
+        },
+        "installable": {
+            "callbackUrl": "https://hipgif.herokuapp.com/installable"
+        },
+        "configurable": {
+            "url": "https://hipgif.herokuapp.com/config"
+        },
+        "webhook": {
+            "url": "https://hipgif.herokuapp.com/webhook",
+            "pattern": "^/gif",
+            "event": "room_message",
+            "name": "HipGif Request"
+        }
+    }
+}

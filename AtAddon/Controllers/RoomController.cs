@@ -12,9 +12,24 @@ namespace AtAddon.Controllers
     public class RoomController : ApiController
     {
         // GET: api/Room
-        public IEnumerable<string> Get()
+        public HttpResponseMessage Get(string name, bool forAlchemi)
         {
-            return new string[] { "value1", "value2" };
+            var ret = new StringBuilder();
+            using (var context = new Models.ChimeraEntities())
+            {
+                var res = from m in context.MESSAGE_STORE where m.RoomName == name.Trim() select m.Message;
+                foreach (var item in res)
+                {
+                    ret.AppendLine(item.Trim());
+                }
+            }
+            HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+
+            result.Content = new StringContent(ret.ToString());
+            //result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            //result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment"); //attachment will force download
+            //result.Content.Headers.ContentDisposition.FileName = string.Format("room_{0}.csv", name.Trim());
+            return result;
         }
         
         // GET: api/Room/5

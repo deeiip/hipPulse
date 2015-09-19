@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configura
 		PublishScripts\Configurations\AtAddon-WAWS-dev.json = PublishScripts\Configurations\AtAddon-WAWS-dev.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "golem", "golem\golem.csproj", "{A35DF1EC-7BFE-47F5-B97B-47BD40E29B52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{0CFB4962-AC4D-4547-91FF-2820EC0F0FA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CFB4962-AC4D-4547-91FF-2820EC0F0FA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CFB4962-AC4D-4547-91FF-2820EC0F0FA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A35DF1EC-7BFE-47F5-B97B-47BD40E29B52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A35DF1EC-7BFE-47F5-B97B-47BD40E29B52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A35DF1EC-7BFE-47F5-B97B-47BD40E29B52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A35DF1EC-7BFE-47F5-B97B-47BD40E29B52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

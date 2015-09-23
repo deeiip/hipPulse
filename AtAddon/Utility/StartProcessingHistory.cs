@@ -19,7 +19,7 @@ namespace AtAddon.Utility
 
             using (var context = new Models.ChimeraEntities())
             {
-                var res = context.MESSAGE_STORE.Where(x => x.RoomName == roomName).Select(x=>x.Id).ToArray();
+                var res = context.MESSAGE_STORE.Where(x => x.RoomName == roomid).Select(x=>x.Id).ToArray();
                 var currentMessageIds = response.Items.ToArray();
                 var newMessages = currentMessageIds.Where(x => !res.Contains(x.Id));
                 foreach (var item in newMessages)
@@ -61,7 +61,7 @@ namespace AtAddon.Utility
 
                     QueueClient Client =
                         QueueClient.CreateFromConnectionString(connectionString, "pending_room");
-                    BrokeredMessage message = new BrokeredMessage(roomName.Trim());
+                    BrokeredMessage message = new BrokeredMessage(roomid.Trim());
 
                    // Set some addtional custom app-specific properties.
                    message.Properties["query_time"] = DateTime.UtcNow.ToString();

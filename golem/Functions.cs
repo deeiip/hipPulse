@@ -19,13 +19,14 @@ namespace golem
         {
             try
             {
+
                 DateTime t_stamp = DateTime.Parse(message.Properties["query_time"].ToString());
                 //logger.WriteLine(message.GetBody<string>());
                 string roomId = message.GetBody<string>();
                 var str = Utility.GetEntities(roomId);
                 logger.WriteLine("Processing for room {0} starting", str.Trim());
                 var treasure = Utility.GetEntities(roomId);
-                
+                message.Complete();
                 
             }
             catch(Exception ex)

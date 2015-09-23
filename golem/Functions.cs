@@ -23,7 +23,7 @@ namespace golem
             try
             {
 
-                DateTime t_stamp = DateTime.Parse(message.Properties["query_time"].ToString());
+                 DateTime t_stamp = DateTime.Parse(message.Properties["query_time"].ToString());
                 //logger.WriteLine(message.GetBody<string>());
                 string roomId = message.GetBody<string>();
                 //var str = Utility.GetEntities(roomId);

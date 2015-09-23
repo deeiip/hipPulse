@@ -36,14 +36,11 @@ namespace AtAddon.Controllers
                     Document Cache = dataCache.GetItem(roomid);
                     if(Cache!=null)
                     {
-                        var rrr = Cache["entity"].ToString().Replace("\r", string.Empty)
-                            .Replace("\n", string.Empty)
-                            .Replace("\t", string.Empty);
                         return new
                         {
                             status = "OK",
                             time_stamp = Cache["time_stamp"],
-                            data = rrr
+                            data = JsonConvert.DeserializeObject(Cache["entity"].ToString())
                         };
                     }
                     break;

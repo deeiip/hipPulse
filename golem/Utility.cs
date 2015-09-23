@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -29,6 +30,9 @@ namespace golem
             Stream resStream = response.GetResponseStream();
             StreamReader reader = new StreamReader(resStream);
             // Read the content.
+            //dynamic d = JsonConvert.DeserializeObject(reader.ReadToEnd());
+            //string isGood = JsonConvert.SerializeObject(d);
+            //return isGood;
             string responseFromServer = reader.ReadToEnd();
             return responseFromServer;
         }

@@ -52,7 +52,7 @@ namespace golem
                 }
                 else
                 {
-                    prevCache["entity"] = treasure;
+                    prevCache["entity"] = fix;
                     prevCache["time_stamp"] = t_stamp;
                     dataCache.UpdateItem(prevCache);
                 }

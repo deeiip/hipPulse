@@ -11,15 +11,15 @@ namespace AtAddon.Utility
 {
     public class History
     {
-        public static void StartProcessingHistory(HipchatClient c, string roomId)
+        public static void StartProcessingHistory(HipchatClient c, string roomName, string roomid)
         {
-            var response = c.ViewRoomHistory(roomId, "recent", "UTC", 0, 1000);
+            var response = c.ViewRoomHistory(roomName, "recent", "UTC", 0, 1000);
             var ttt = response.Items.ToString();
             string jsonStr = JsonConvert.SerializeObject(response.Items);
 
             using (var context = new Models.ChimeraEntities())
             {
-                var res = context.MESSAGE_STORE.Where(x => x.RoomName == roomId).Select(x=>x.Id).ToArray();
+                var res = context.MESSAGE_STORE.Where(x => x.RoomName == roomName).Select(x=>x.Id).ToArray();
                 var currentMessageIds = response.Items.ToArray();
                 var newMessages = currentMessageIds.Where(x => !res.Contains(x.Id));
                 foreach (var item in newMessages)
@@ -49,7 +49,7 @@ namespace AtAddon.Utility
                         Message = item.Message,
                         MessageFormat = (int)item.MessageFormat,
                         Type = (int)item.Type,
-                        RoomName = roomId
+                        RoomName = roomid
                     });
                     
                 }
@@ -61,7 +61,7 @@ namespace AtAddon.Utility
 
                     QueueClient Client =
                         QueueClient.CreateFromConnectionString(connectionString, "pending_room");
-                    BrokeredMessage message = new BrokeredMessage(roomId.Trim());
+                    BrokeredMessage message = new BrokeredMessage(roomName.Trim());
 
                    // Set some addtional custom app-specific properties.
                    message.Properties["query_time"] = DateTime.UtcNow.ToString();

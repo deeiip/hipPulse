@@ -12,9 +12,11 @@ namespace golem
     {
         // This function will get triggered/executed when a new message is written 
         // on an Azure Queue called queue.
-        public static void ProcessQueueMessage([QueueTrigger("queue")] string message, TextWriter log)
+        // Endpoint=sb://pending-room-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=oEuKGLgVlVEIkhCR4B96qz4yOCeqL0YeqzOJ8DVyH4w=
+        public static void ProcessQueueMessage([ServiceBusTrigger("pending_room")] string message,
+        TextWriter logger)
         {
-            log.WriteLine(message);
+            logger.WriteLine(message);
         }
     }
 }

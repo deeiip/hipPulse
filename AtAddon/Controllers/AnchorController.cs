@@ -51,7 +51,18 @@ namespace AtAddon.Controllers
                         context.SaveChanges();
                         c = new HipchatClient(target.AuthToken);
                         c.SendNotification(roomId, new HipchatApiV2.Requests.SendRoomNotificationRequest() { Message = message });
-                        Utility.History.StartProcessingHistory(c, roomName);
+                        try
+                        {
+                            Utility.History.StartProcessingHistory(c, roomName);
+                        }
+                        catch(Exception ex2)
+                        {
+                            c.SendNotification(roomId, new HipchatApiV2.Requests.SendRoomNotificationRequest()
+                            {
+                                Message
+                                    = "There was some error processing your request. Don't worry we'd do our part. In the meantime we'd ask you to please hit /report once again"
+                            });
+                        }
                     }
                     
                 }

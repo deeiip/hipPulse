@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Microsoft.ServiceBus.Messaging;
 
 namespace AtAddon.Utility
 {
@@ -55,10 +56,22 @@ namespace AtAddon.Utility
                 try
                 {
                     context.SaveChanges();
+                    string connectionString = "Endpoint=sb://pending-room-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=oEuKGLgVlVEIkhCR4B96qz4yOCeqL0YeqzOJ8DVyH4w=";
+
+
+                    QueueClient Client =
+                        QueueClient.CreateFromConnectionString(connectionString, "pending_room");
+                    BrokeredMessage message = new BrokeredMessage(roomName.Trim());
+
+                   // Set some addtional custom app-specific properties.
+                   message.Properties["query_time"] = DateTime.UtcNow.ToString();
+
+                   // Send message to the queue.
+                   Client.Send(message);
                 }
                 catch(Exception ex)
                 {
-
+                    throw new Exception("Can not save to db", ex);
                 }
             }
         }

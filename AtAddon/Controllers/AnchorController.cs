@@ -27,7 +27,7 @@ namespace AtAddon.Controllers
         public void Post([FromBody]dynamic value)
         {
             string roomId = value.item.room.id;
-            string roomName = value.item.room.name;
+            //string roomName = value.item.room.name;
             Guid clientId = value.oauth_client_id;
             using (var context = new Models.ChimeraEntities())
             {
@@ -40,7 +40,7 @@ namespace AtAddon.Controllers
                     try
                     {
                         c.SendNotification(roomId, new HipchatApiV2.Requests.SendRoomNotificationRequest() { Message = message });
-                        Utility.History.StartProcessingHistory(c, roomName);
+                        Utility.History.StartProcessingHistory(c, roomId);
                         
                     }
                     catch(Exception ex)
@@ -53,7 +53,7 @@ namespace AtAddon.Controllers
                         c.SendNotification(roomId, new HipchatApiV2.Requests.SendRoomNotificationRequest() { Message = message });
                         try
                         {
-                            Utility.History.StartProcessingHistory(c, roomName);
+                            Utility.History.StartProcessingHistory(c, roomId);
                         }
                         catch(Exception ex2)
                         {

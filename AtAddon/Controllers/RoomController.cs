@@ -33,14 +33,14 @@ namespace AtAddon.Controllers
         }
         
         // GET: api/Room/5
-        public HttpResponseMessage Get(string roomName)
+        public HttpResponseMessage Get(string roomId)
         {
             var ret = new StringBuilder();
             //,Date,From,Message,MessageFormat,Type,File,Links,RoomName
             ret.Append("Id,Color,Date,From,Message,MessageFormat,Type,File,Links,RoomName\n");
             using (var context = new Models.ChimeraEntities())
             {
-                var res = from m in context.MESSAGE_STORE where m.RoomName == roomName.Trim() select m;
+                var res = from m in context.MESSAGE_STORE where m.RoomName == roomId.Trim() select m;
                 foreach (var item in res)
                 {
                     ret.AppendFormat("\"{0}\",", item.Id);
@@ -52,7 +52,7 @@ namespace AtAddon.Controllers
                     ret.AppendFormat("\"{0}\",", item.Type );
                     ret.AppendFormat("\"{0}\",", item.File );
                     ret.AppendFormat("\"{0}\",", item.Links );
-                    ret.AppendFormat("\"{0}\"\r\n", roomName );
+                    ret.AppendFormat("\"{0}\"\r\n", roomId );
                 }
             }
             HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
@@ -60,7 +60,7 @@ namespace AtAddon.Controllers
             result.Content = new StringContent(ret.ToString());
             result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
             result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment"); //attachment will force download
-            result.Content.Headers.ContentDisposition.FileName = string.Format("room_{0}.csv", roomName.Trim());
+            result.Content.Headers.ContentDisposition.FileName = string.Format("room_{0}.csv", roomId.Trim());
             return result;
         }
 

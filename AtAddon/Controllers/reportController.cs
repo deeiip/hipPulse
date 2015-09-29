@@ -44,7 +44,6 @@ namespace AtAddon.Controllers
                             status = "OK",
                             time_stamp = Cache["time_stamp"],
                             data = JsonConvert.DeserializeObject(Cache["entity"].ToString())
-
                         };
                     }
                     break;

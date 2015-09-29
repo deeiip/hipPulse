@@ -12,7 +12,9 @@ namespace AtAddon.Controllers
 {
     public enum ReportType
     {
-        Entity
+        Entity,
+        Concept,
+        Keyword
     }
     public class reportController : ApiController
     {
@@ -26,14 +28,15 @@ namespace AtAddon.Controllers
         // GET: api/report/5
         public dynamic Get(string roomid, int type)
         {
+            AmazonDynamoDBClient client = new AmazonDynamoDBClient("AKIAINYB73XJJD5MCCNA", "YXE31LiskMC8+tFZw+CwFvPr0Rvk2NRp8HU1XZr2",
+                                                                Amazon.RegionEndpoint.USWest2);
+            Table dataCache = Table.LoadTable(client, "resultCache");
+            Document Cache = dataCache.GetItem(roomid);
             switch (type)
             {
                 case (int)ReportType.Entity:
 
-                    AmazonDynamoDBClient client = new AmazonDynamoDBClient("AKIAINYB73XJJD5MCCNA", "YXE31LiskMC8+tFZw+CwFvPr0Rvk2NRp8HU1XZr2",
-                                                                Amazon.RegionEndpoint.USWest2);
-                    Table dataCache = Table.LoadTable(client, "resultCache");
-                    Document Cache = dataCache.GetItem(roomid);
+                    
                     if(Cache!=null)
                     {
                         return new
@@ -45,6 +48,28 @@ namespace AtAddon.Controllers
                     }
                     break;
                 default:
+                    break;
+                case (int)ReportType.Concept:
+                    if(Cache!=null)
+                    {
+                        return new
+                        {
+                            status = "OK",
+                            time_stamp = Cache["time_stamp"],
+                            data = JsonConvert.DeserializeObject(Cache["concept"].ToString())
+                        };
+                    }
+                    break;
+                case (int)ReportType.Keyword:
+                    if (Cache != null)
+                    {
+                        return new
+                        {
+                            status = "OK",
+                            time_stamp = Cache["time_stamp"],
+                            data = JsonConvert.DeserializeObject(Cache["keyword"].ToString())
+                        };
+                    }
                     break;
             }
             return JsonConvert.SerializeObject(new { status = "UNKNOWN_ERROR" });

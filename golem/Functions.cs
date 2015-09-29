@@ -28,12 +28,18 @@ namespace golem
                 string roomId = message.GetBody<string>();
                 //var str = Utility.GetEntities(roomId);
                 logger.WriteLine("Processing for room {0} starting", roomId.Trim());
-                var treasure = Utility.GetEntities(roomId);
-
+                //var treasure = Utility.GetEntities(roomId);
+                string treasure = null;
+                string jackpot = null;
+                string magic = null;
                 AmazonDynamoDBClient client = new AmazonDynamoDBClient("AKIAINYB73XJJD5MCCNA", "YXE31LiskMC8+tFZw+CwFvPr0Rvk2NRp8HU1XZr2",
                     Amazon.RegionEndpoint.USWest2);
-                
-                
+
+
+                Parallel.Invoke(
+                        () => { treasure = Utility.GetEntities(roomId); },
+                        () => { jackpot =  Utility.GetConcept(roomId); },
+                        () => { magic = Utility.GetKeyword(roomId); });
 
                 Table dataCache = Table.LoadTable(client, "resultCache");
 
@@ -42,17 +48,25 @@ namespace golem
                 string fix =
                         Regex.Replace(treasure, @"^\s*$\n", string.Empty, RegexOptions.Multiline)
                         .TrimEnd();
+                string fixJack = Regex.Replace(jackpot, @"^\s*$\n", string.Empty, RegexOptions.Multiline)
+                        .TrimEnd();
+                string fixMagic = Regex.Replace(magic, @"^\s*$\n", string.Empty, RegexOptions.Multiline)
+                        .TrimEnd();
                 if (prevCache == null)
                 {
                     var cache = new Document();
                     cache["roomid"] = roomId;
                     cache["entity"] = fix;
+                    cache["concept"] = fixJack;
+                    cache["keyword"] = fixMagic;
                     cache["time_stamp"] = t_stamp;
                     dataCache.PutItem(cache);
                 }
                 else
                 {
                     prevCache["entity"] = fix;
+                    prevCache["concept"] = fixJack;
+                    prevCache["keyword"] = fixMagic;
                     prevCache["time_stamp"] = t_stamp;
                     dataCache.UpdateItem(prevCache);
                 }

@@ -75,6 +75,13 @@ namespace AtAddon.Controllers
             return JsonConvert.SerializeObject(new { status = "UNKNOWN_ERROR" });
         }
 
+
+        public void HeatMap(string roomid)
+        {
+            
+        }
+
+
         // POST: api/report
         public void Post([FromBody]string value)
         {

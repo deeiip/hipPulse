@@ -14,6 +14,10 @@ namespace AtAddon.Controllers
             return View("viewer");
         }
 
+        public ActionResult concept()
+        {
+            return View("concept");
+        }
         // GET: visualize/Details/5
         public ActionResult Details(int id)
         {

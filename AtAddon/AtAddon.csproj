@@ -247,6 +247,8 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnchorController.cs" />
+    <Compile Include="Controllers\FrequencyController.cs" />
+    <Compile Include="Controllers\HeatMapController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstallController.cs" />
     <Compile Include="Controllers\reportController.cs" />
@@ -1177,6 +1179,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\visualize\viewer.cshtml" />
+    <Content Include="Views\visualize\concept.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

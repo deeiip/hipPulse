@@ -1151,6 +1151,7 @@
     <None Include="Properties\PublishProfiles\hipchatimpulse.pubxml" />
     <Content Include="Properties\webjobs-list.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\conceptVisual.js" />
     <Content Include="Scripts\entityVisual.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

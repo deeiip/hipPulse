@@ -72,13 +72,21 @@ d3.json(url, function (error, root) {
             }
         });
 });
-
+var globFrame;
 // Returns a flattened hierarchy containing all leaf nodes under the root.
 function classes(root) {
     var classes = [];
 
     for (var i = 0; i < root.data.keywords.length; i++) {
         classes.push({ name: root.data.keywords[i].text, value: parseFloat(root.data.keywords[i].relevance*100) })
+    }
+    globFrame = classes;
+    for (var i = 0; i < classes.length && i< 25; i++) {
+        var htm = '<tr><td>' + (i + 1) + '.</td><td style="width:300px;">' + classes[i].name
+            +'</td></tr>;'
+        var newK = $(htm).hide();
+        $('#key-table').append(newK);
+        newK.show('normal');
     }
     return { children: classes };
 }

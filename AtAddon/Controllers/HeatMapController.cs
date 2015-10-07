@@ -52,7 +52,7 @@ namespace AtAddon.Controllers
                     words.Add(item.text.ToString(), item.type.ToString());
                 }
                 Dictionary<DateTime, List<Frequency>> register = new Dictionary<DateTime, List<Frequency>>();
-                Dictionary<DateTime, List<CatFrequency>> catRegister = new Dictionary<DateTime, List<CatFrequency>>();
+                //Dictionary<DateTime, List<CatFrequency>> catRegister = new Dictionary<DateTime, List<CatFrequency>>();
                 foreach (var tarWord in words.Keys)
                 {
                     int count = 0;
@@ -76,44 +76,44 @@ namespace AtAddon.Controllers
                             register.Add(item.Time, new List<Frequency>());
                             register[item.Time].Add(f);
                         }
-                        if(catRegister.ContainsKey(item.Time))
-                        {
-                            var prev = catRegister[item.Time];
-                            //var alreadyExists = prev.Select(x => { return x.Cat == words[tarWord]; });
-                            var alreadyExists = from t in prev where t.Cat.ToLower() == words[tarWord].ToLower() select t;
-                            if (alreadyExists.Count()==0)
-                            {
-                                catRegister[item.Time].Add(new CatFrequency()
-                                {
-                                    Cat = words[tarWord].ToLower(),
-                                    Count = 1
-                                });
-                            }
-                            else
-                            {
-                                var target = alreadyExists.First();
-                                target.Count++;
-                            }
-                        }
-                        else
-                        {
-                            catRegister.Add(item.Time, new List<CatFrequency>());
-                            catRegister[item.Time].Add(new CatFrequency()
-                            {
-                                Cat = words[tarWord],
-                                Count = 1
-                            });
-                        }
+                        //if(catRegister.ContainsKey(item.Time))
+                        //{
+                        //    var prev = catRegister[item.Time];
+                        //    //var alreadyExists = prev.Select(x => { return x.Cat == words[tarWord]; });
+                        //    var alreadyExists = from t in prev where t.Cat.ToLower() == words[tarWord].ToLower() select t;
+                        //    if (alreadyExists.Count()==0)
+                        //    {
+                        //        catRegister[item.Time].Add(new CatFrequency()
+                        //        {
+                        //            Cat = words[tarWord].ToLower(),
+                        //            Count = 1
+                        //        });
+                        //    }
+                        //    else
+                        //    {
+                        //        var target = alreadyExists.First();
+                        //        target.Count++;
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    catRegister.Add(item.Time, new List<CatFrequency>());
+                        //    catRegister[item.Time].Add(new CatFrequency()
+                        //    {
+                        //        Cat = words[tarWord],
+                        //        Count = 1
+                        //    });
+                        //}
                     }
 
                 }
-                return new { Status = "OK", wordStat = register, catStat = catRegister };
+                return new { Status = "OK", wordStat = register };
             }
             return JsonConvert.SerializeObject(new { Status = "Fail" });
         }
 
         // GET: api/HeatMap/5
-        public dynamic Get(string roomid, string word)
+        public void Get(string roomid, string cat)
         {
             using (var context = new Models.ChimeraEntities())
             {
@@ -125,31 +125,19 @@ namespace AtAddon.Controllers
                     temp.Add(new Entry() { Message = item.Message, T_S = DateTime.Parse(item.Date) });
                 }
                 var qry = from w in temp group w by w.T_S.Date into g select new { Time = g.Key, Messages = g.ToList() };
-                Dictionary<DateTime, List<Frequency>> register = new Dictionary<DateTime, List<Frequency>>();
-                string tarWord = word;
-                int count = 0;
-                foreach (var item in qry)
+                AmazonDynamoDBClient client = new AmazonDynamoDBClient("AKIAINYB73XJJD5MCCNA", "YXE31LiskMC8+tFZw+CwFvPr0Rvk2NRp8HU1XZr2",
+                                                                Amazon.RegionEndpoint.USWest2);
+                Table dataCache = Table.LoadTable(client, "resultCache");
+                Document Cache = dataCache.GetItem(roomid);
+                dynamic entities = JsonConvert.DeserializeObject(Cache["entity"].ToString());
+                Dictionary<string, string> words = new Dictionary<string, string>();
+                foreach (var item in entities.entities)
                 {
-                    count = item.Messages.Count(x =>
+                    if (item.type.toLower().Contains(cat.ToLower()))
                     {
-                        return x.Message.ToLower().Contains(tarWord.ToLower());
-                    });
-                    Frequency f = new Frequency()
-                    {
-                        Word = tarWord,
-                        Count = count
-                    };
-                    if (register.ContainsKey(item.Time))
-                    {
-                        register[item.Time].Add(f);
-                    }
-                    else
-                    {
-                        register.Add(item.Time, new List<Frequency>());
-                        register[item.Time].Add(f);
+                        words.Add(item.text.ToString(), item.type.ToString());
                     }
                 }
-                return new { Status = "OK", Data = register };
             }
         }
 

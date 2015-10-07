@@ -136,7 +136,7 @@
                 <ul class="sidebar-menu">
                     <li class="header">MAIN NAVIGATION</li>
                     <li>
-                        <a href="#" class="room-nav">
+                        <a href="/visualize" class="room-nav">
                             <i class="fa fa-crosshairs text-red"></i> <span>Entities</span>
                         </a>
                     </li>
@@ -147,7 +147,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="pages/calendar.html" class="room-nav">
+                        <a href="#" class="room-nav">
                             <i class="fa fa-key text-aqua"></i> <span>Keywords</span>
                             <small class="label pull-right bg-red">3</small>
                         </a>
@@ -221,26 +221,18 @@
                                 <h3 class="box-title">Keywords</h3>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                    <div class="btn-group">
-                                        <button class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i></button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Action</a></li>
-                                            <li><a href="#">Another action</a></li>
-                                            <li><a href="#">Something else here</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">Separated link</a></li>
-                                        </ul>
-                                    </div>
+                                    
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                 </div>
                             </div><!-- /.box-header -->
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="col-md-3">
-
-                                        
-                                    </div><!-- /.col -->
-                                </div><!-- /.row -->
+                            <div class="box-body" style="100%">
+                                <table style="width:100%" id="key-table" class="table table-bordered">
+                                    <tr>
+                                        <th style="width: 10px">#</th>
+                                        <th style="width:60px;">Keyword</th>
+                                    </tr>
+                                
+                                </table>
                             </div><!-- ./box-body -->
                         </div><!-- /.box -->
                     </div>

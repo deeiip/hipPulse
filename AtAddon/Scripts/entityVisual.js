@@ -87,6 +87,14 @@ $.get(url, function (data) {
         if (entityTypeFreq.hasOwnProperty(key)) {
             eFreq.push({ type: key, count: entityTypeFreq[key] });
             totETypeCount += entityTypeFreq[key];
+            $("select#cat1-drop").append($("<option>")
+                .val(key)
+                .html(key)
+            );
+            $("select#cat2-drop").append($("<option>")
+                .val(key)
+                .html(key)
+            );
         }
     }
     eFreq.sort(function (a, b) { return b.count - a.count; });
@@ -108,14 +116,7 @@ $.get(url, function (data) {
         if (entityFreq.hasOwnProperty(key)) {
             eFreqWord.push({ word: key, count: entityFreq[key] });
             totECount += entityFreq[key];
-            $("select#cat1-drop").append($("<option>")
-                .val(key)
-                .html(key)
-            );
-            $("select#cat2-drop").append($("<option>")
-                .val(key)
-                .html(key)
-            );
+            
         }
     }
     eFreqWord.sort(function (p, q) { return q.count - p.count; });

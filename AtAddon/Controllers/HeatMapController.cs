@@ -113,7 +113,7 @@ namespace AtAddon.Controllers
         }
 
         // GET: api/HeatMap/5
-        public void Get(string roomid, string cat)
+        public dynamic Get(string roomid, string cat)
         {
             using (var context = new Models.ChimeraEntities())
             {
@@ -130,14 +130,31 @@ namespace AtAddon.Controllers
                 Table dataCache = Table.LoadTable(client, "resultCache");
                 Document Cache = dataCache.GetItem(roomid);
                 dynamic entities = JsonConvert.DeserializeObject(Cache["entity"].ToString());
-                Dictionary<string, string> words = new Dictionary<string, string>();
+                List<string> words = new List<string>();
                 foreach (var item in entities.entities)
                 {
-                    if (item.type.toLower().Contains(cat.ToLower()))
+                    if (item.type.ToString().ToLower().Contains(cat.ToLower()))
                     {
-                        words.Add(item.text.ToString(), item.type.ToString());
+                        words.Add(item.text.ToString());
                     }
                 }
+                Dictionary<DateTime, int> returnCount = new Dictionary<DateTime, int>();
+                foreach (var item in qry)
+                {
+                    int tCount = 0;
+                    foreach (var message in item.Messages)
+                    {
+                        foreach (var w in words)
+                        {
+                            if(message.Message.ToLower().Contains(w.ToLower()))
+                            {
+                                tCount++;
+                            }
+                        }
+                    }
+                    returnCount.Add(item.Time, tCount);
+                }
+                return new { Status = "OK", Result = returnCount };
             }
         }
 

@@ -72,9 +72,11 @@ namespace golem
                     prevCache["time_stamp"] = t_stamp;
                     dataCache.UpdateItem(prevCache);
                 }
-                string mess = string.Format("I've refreshed the report. Find your detailed report at {0}", roomId);
+                string mess = string.Format("I've refreshed the report. Find your detailed report  <a href=http://hipchatimpulse.azurewebsites.net/visualize?roomid={0}> here </a>", roomId);
                 HipchatClient c = new HipchatClient(authToken);
-                c.SendNotification(roomId, new HipchatApiV2.Requests.SendRoomNotificationRequest() { Message = mess });
+                c.SendNotification(roomId, new HipchatApiV2.Requests.SendRoomNotificationRequest() {
+                    Message = mess, MessageFormat = HipchatApiV2.Enums.HipchatMessageFormat.Html 
+                });
                 message.Complete();
                 
             }

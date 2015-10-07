@@ -9,6 +9,7 @@ using Microsoft.ServiceBus.Messaging;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
 using System.Text.RegularExpressions;
+using HipchatApiV2;
 
 namespace golem
 {
@@ -24,10 +25,11 @@ namespace golem
             {
 
                  DateTime t_stamp = DateTime.Parse(message.Properties["query_time"].ToString());
+                 string authToken = message.Properties["auth_token"].ToString();
                 //logger.WriteLine(message.GetBody<string>());
                 string roomId = message.GetBody<string>();
                 //var str = Utility.GetEntities(roomId);
-                logger.WriteLine("Processing for room {0} starting", roomId.Trim());
+                //logger.WriteLine("Processing for room {0} starting", roomId.Trim());
                 //var treasure = Utility.GetEntities(roomId);
                 string treasure = null;
                 string jackpot = null;
@@ -70,8 +72,9 @@ namespace golem
                     prevCache["time_stamp"] = t_stamp;
                     dataCache.UpdateItem(prevCache);
                 }
-
-                
+                string mess = string.Format("I've refreshed the report. Find your detailed report at {0}", roomId);
+                HipchatClient c = new HipchatClient(authToken);
+                c.SendNotification(roomId, new HipchatApiV2.Requests.SendRoomNotificationRequest() { Message = mess });
                 message.Complete();
                 
             }

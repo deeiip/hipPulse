@@ -11,7 +11,7 @@ namespace AtAddon.Utility
 {
     public class History
     {
-        public static void StartProcessingHistory(HipchatClient c, string roomName, string roomid)
+        public static void StartProcessingHistory(HipchatClient c, string roomName, string roomid, string auth)
         {
             var response = c.ViewRoomHistory(roomName, "recent", "UTC", 0, 1000);
             var ttt = response.Items.ToString();
@@ -65,7 +65,7 @@ namespace AtAddon.Utility
 
                    // Set some addtional custom app-specific properties.
                    message.Properties["query_time"] = DateTime.UtcNow.ToString();
-
+                   message.Properties["auth_token"] = auth;
                    // Send message to the queue.
                    Client.Send(message);
                 }

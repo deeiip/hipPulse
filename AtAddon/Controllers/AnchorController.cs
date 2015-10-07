@@ -18,8 +18,9 @@ namespace AtAddon.Controllers
         }
 
         // GET: api/Anchor/5
-        public string Get(int id)
+        public string Get(int roomid)
         {
+
             return "value";
         }
 
@@ -40,7 +41,7 @@ namespace AtAddon.Controllers
                     try
                     {
                         c.SendNotification(roomId, new HipchatApiV2.Requests.SendRoomNotificationRequest() { Message = message });
-                        Utility.History.StartProcessingHistory(c, roomName, roomId);
+                        Utility.History.StartProcessingHistory(c, roomName, roomId, target.AuthToken);
                         
                     }
                     catch(Exception ex)
@@ -53,7 +54,7 @@ namespace AtAddon.Controllers
                         c.SendNotification(roomId, new HipchatApiV2.Requests.SendRoomNotificationRequest() { Message = message });
                         try
                         {
-                            Utility.History.StartProcessingHistory(c, roomName, roomId);
+                            Utility.History.StartProcessingHistory(c, roomName, roomId, target.AuthToken);
                         }
                         catch(Exception ex2)
                         {

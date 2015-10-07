@@ -138,7 +138,7 @@ namespace AtAddon.Controllers
                         words.Add(item.text.ToString());
                     }
                 }
-                Dictionary<DateTime, int> returnCount = new Dictionary<DateTime, int>();
+                SortedDictionary<DateTime, int> returnCount = new SortedDictionary<DateTime, int>();
                 foreach (var item in qry)
                 {
                     int tCount = 0;
@@ -154,6 +154,7 @@ namespace AtAddon.Controllers
                     }
                     returnCount.Add(item.Time, tCount);
                 }
+                
                 return new { Status = "OK", Result = returnCount };
             }
         }

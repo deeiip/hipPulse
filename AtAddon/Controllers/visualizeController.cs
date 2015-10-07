@@ -18,6 +18,10 @@ namespace AtAddon.Controllers
         {
             return View("concept");
         }
+        public ActionResult keywords()
+        {
+            return View("keyword");
+        }
         // GET: visualize/Details/5
         public ActionResult Details(int id)
         {

@@ -35,8 +35,6 @@ namespace AtAddon.Controllers
             switch (type)
             {
                 case (int)ReportType.Entity:
-
-                    
                     if(Cache!=null)
                     {
                         return new

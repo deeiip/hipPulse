@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>Hipchat Room Pulse</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -122,38 +122,39 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="../dist/img/chatroom.png" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
                         <p>Room Number</p>
-                        <a href="#"><i class="fa fa-circle text-success"></i> 324765489</a>
+                        <a href="#" id="room_number"> 324765489</a>
                     </div>
                 </div>
+                <div class="user-panel" style="height:40px"></div>
                 <!-- search form -->
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li class="header">MAIN NAVIGATION</li>
                     <li>
-                        <a href="/visualize">
+                        <a href="/visualize" class="room-nav">
                             <i class="fa fa-crosshairs text-red"></i> <span>Entities</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#" class="room-nav">
                             <i class="fa fa-comments-o text-yellow"></i>  <span>Concepts</span>
                             <small class="label pull-right bg-red">3</small>
                         </a>
                     </li>
                     <li>
-                        <a href="pages/calendar.html">
+                        <a href="pages/calendar.html" class="room-nav">
                             <i class="fa fa-key text-aqua"></i> <span>Keywords</span>
                             <small class="label pull-right bg-red">3</small>
                         </a>
                     </li>
 
                     <li>
-                        <a href="documentation/index.html">
+                        <a href="documentation/index.html" >
                             <i class="fa fa-book"></i> <span>Documentation</span>
                             <small class="label pull-right bg-green">new</small>
                         </a>
@@ -176,10 +177,6 @@
                     Room summary
                     <small>concepts visualization</small>
                 </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li class="active">Dashboard</li>
-                </ol>
             </section>
 
             <!-- Main content -->
@@ -200,7 +197,10 @@
 
                                 <div class="chart tab-pane active" style="position: relative;" id="concepts">
 
-                                    
+                                    <div id="concept-waiting"  class="callout callout-info" style="margin:20px; text-align:center">
+                                        <h4 style="text-align:center"><i class="fa fa-3x fa-refresh fa-spin"></i></h4>
+                                        <p>Fetching results. Hang tight!</p>
+                                    </div>
 
                                 </div>
                             </div>
@@ -304,9 +304,9 @@
         </div><!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
-                <b>Version</b> 2.3.0
+                <b>Version</b> 0.7.1
             </div>
-            <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; 2014-2015 <a href="https://dipanjan.me">Dipanjan Nag</a>.</strong> All rights reserved.
         </footer>
 
         <!-- Control Sidebar -->

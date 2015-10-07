@@ -95,8 +95,54 @@ $.get(url, function (data) {
                 .val(key)
                 .html(key)
             );
+            
         }
     }
+    ops = $("#cat1-drop").children();
+
+    $('#cat2-drop').val(ops[1].value);
+
+
+
+    var heatUrl = heatMapUrlBase + encodeURIComponent(ops[0].value);
+    $.get(heatUrl, function (data) {
+        chk = data;
+        var tempLab = [];
+        var counts = [];
+        var leb = [];
+        for (var key in data.Result) {
+            console.log(new Date(key));
+            var cDate = new Date(key);
+            tempLab.push(cDate);
+            counts.push(data.Result[key]);
+            leb.push(cDate.getMonth() + "/" + cDate.getDate());
+        }
+        Linedata.labels = leb;
+        Linedata.datasets[0].data = counts;
+        var myLineChart = new Chart(ctx).Line(Linedata, options);
+    });
+    var heatUrl = heatMapUrlBase + encodeURIComponent(ops[1].value);
+    $.get(heatUrl, function (data) {
+        chk = data;
+        var tempLab = [];
+        var counts = [];
+        var leb = [];
+        for (var key in data.Result) {
+            console.log(new Date(key));
+            var cDate = new Date(key);
+            tempLab.push(cDate);
+            counts.push(data.Result[key]);
+            leb.push(cDate.getMonth() + "/" + cDate.getDate());
+        }
+        Linedata.labels = leb;
+        Linedata.datasets[1].data = counts;
+        var myLineChart = new Chart(ctx).Line(Linedata, options);
+    });
+
+
+
+
+
     eFreq.sort(function (a, b) { return b.count - a.count; });
     $("#hottest-en-count").text(eFreq[0].type);
     $("#least-en-count").text(eFreq[eFreq.length - 1].type);
@@ -545,7 +591,7 @@ var options = {
 };
 
 var chk;
-var heatMapUrlBase = '/api/HeatMap?roomid=1920655&cat=';
+var heatMapUrlBase = '/api/HeatMap?roomid=' + roomNumber + '&cat=';
 $('#cat1-drop').on('change', function () {
     var heatUrl = heatMapUrlBase + encodeURIComponent(this.value);
     $.get(heatUrl, function (data) {

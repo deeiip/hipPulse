@@ -25,7 +25,8 @@ namespace AtAddon.Utility
                 foreach (var item in newMessages)
                 {
 
-                    if(item.From.Trim()== "HipPulse" || item.Message == "/report")
+                    if(item.From.Trim()== "HipPulse" || item.Message == "/report" || 
+                        item.From.Trim().ToLower().Contains("Summary For HipChat".ToLower()))
                     {
                         continue;
                     }

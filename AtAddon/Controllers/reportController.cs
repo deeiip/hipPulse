@@ -28,6 +28,10 @@ namespace AtAddon.Controllers
         // GET: api/report/5
         public dynamic Get(string roomid, int type)
         {
+            if(roomid==null || roomid==String.Empty)
+            {
+                return new { Status = "Fail" };
+            }
             AmazonDynamoDBClient client = new AmazonDynamoDBClient("AKIAINYB73XJJD5MCCNA", "YXE31LiskMC8+tFZw+CwFvPr0Rvk2NRp8HU1XZr2",
                                                                 Amazon.RegionEndpoint.USWest2);
             Table dataCache = Table.LoadTable(client, "resultCache");

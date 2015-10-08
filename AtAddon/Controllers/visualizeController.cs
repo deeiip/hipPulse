@@ -9,17 +9,29 @@ namespace AtAddon.Controllers
     public class visualizeController : Controller
     {
         // GET: visualize
-        public ActionResult Index()
+        public ActionResult Index(string roomid)
         {
+            if(roomid==null|| roomid==string.Empty)
+            {
+                return new HttpStatusCodeResult(404);
+            }
             return View("viewer");
         }
 
-        public ActionResult concept()
+        public ActionResult concept(string roomid)
         {
+            if (roomid == null || roomid == string.Empty)
+            {
+                return new HttpStatusCodeResult(404);
+            }
             return View("concept");
         }
-        public ActionResult keywords()
+        public ActionResult keywords(string roomid)
         {
+            if (roomid == null || roomid == string.Empty)
+            {
+                return new HttpStatusCodeResult(404);
+            }
             return View("keyword");
         }
         // GET: visualize/Details/5

@@ -36,6 +36,7 @@ namespace AtAddon.Controllers
                                                                 Amazon.RegionEndpoint.USWest2);
             Table dataCache = Table.LoadTable(client, "resultCache");
             Document Cache = dataCache.GetItem(roomid);
+            
             switch (type)
             {
                 case (int)ReportType.Entity:

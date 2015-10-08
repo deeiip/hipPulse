@@ -17,6 +17,11 @@ $('.room-nav').each(function () {
 });
 $.get(url, function (data) {
 
+    if (data == '{"status":"UNKNOWN_ERROR"}') {
+        $("#waiting").hide();
+        $("#entity-main").html('<h3 style="text-align:center">Room is not available for entity visualization to<br> your credential.</h3>');
+        return;
+    }
     if (data.data.entities.length == 0)
     {
         $("#waiting").hide();

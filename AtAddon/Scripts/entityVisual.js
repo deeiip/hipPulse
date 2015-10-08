@@ -22,6 +22,7 @@ $.get(url, function (data) {
         $("#waiting").hide();
         $("#entity-main").html('<h3 style="text-align:center">Insuffecient data available for a sensible entity visualization.</h3>');
         return;
+
     }
     var addCatToRoot = function (cat) {
         if (findCat(cat.name) == -1) {

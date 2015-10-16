@@ -116,6 +116,7 @@ $.get(url, function (data) {
     }
     {
         $('#cat2-drop').val(ops[1].value);
+
     }
 
 

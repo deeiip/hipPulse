@@ -110,8 +110,13 @@ $.get(url, function (data) {
         }
     }
     ops = $("#cat1-drop").children();
-
-    $('#cat2-drop').val(ops[1].value);
+    if (ops.length < 2)
+    {
+        $('#cat2-drop').val(ops[0].value)
+    }
+    {
+        $('#cat2-drop').val(ops[1].value);
+    }
 
 
 

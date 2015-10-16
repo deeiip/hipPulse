@@ -159,19 +159,19 @@ namespace AtAddon.Controllers
             }
         }
 
-        // POST: api/HeatMap
-        public void Post([FromBody]string value)
-        {
-        }
+        //// POST: api/HeatMap
+        //public void Post([FromBody]string value)
+        //{
+        //}
 
-        // PUT: api/HeatMap/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        //// PUT: api/HeatMap/5
+        //public void Put(int id, [FromBody]string value)
+        //{
+        //}
 
-        // DELETE: api/HeatMap/5
-        public void Delete(int id)
-        {
-        }
+        //// DELETE: api/HeatMap/5
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

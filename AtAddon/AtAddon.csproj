@@ -253,7 +253,6 @@
     <Compile Include="Controllers\InstallController.cs" />
     <Compile Include="Controllers\reportController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\visualizeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

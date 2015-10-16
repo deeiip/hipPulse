@@ -64,19 +64,19 @@ namespace AtAddon.Controllers
             return result;
         }
 
-        // POST: api/Room
-        public void Post([FromBody]string value)
-        {
-        }
+        //// POST: api/Room
+        //public void Post([FromBody]string value)
+        //{
+        //}
 
-        // PUT: api/Room/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        //// PUT: api/Room/5
+        //public void Put(int id, [FromBody]string value)
+        //{
+        //}
 
-        // DELETE: api/Room/5
-        public void Delete(int id)
-        {
-        }
+        //// DELETE: api/Room/5
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

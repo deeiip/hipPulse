@@ -79,25 +79,25 @@ namespace AtAddon.Controllers
         }
 
 
-        public void HeatMap(string roomid)
-        {
+        //public void HeatMap(string roomid)
+        //{
             
-        }
+        //}
 
 
-        // POST: api/report
-        public void Post([FromBody]string value)
-        {
-        }
+        //// POST: api/report
+        //public void Post([FromBody]string value)
+        //{
+        //}
 
-        // PUT: api/report/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        //// PUT: api/report/5
+        //public void Put(int id, [FromBody]string value)
+        //{
+        //}
 
-        // DELETE: api/report/5
-        public void Delete(int id)
-        {
-        }
+        //// DELETE: api/report/5
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

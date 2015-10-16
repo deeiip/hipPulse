@@ -22,16 +22,16 @@ namespace AtAddon.Controllers
     public class InstallController : ApiController
     {
         // GET: api/Install
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
-        // GET: api/Install/5
-        public string Get(int id)
-        {
-            return "value";
-        }
+        //// GET: api/Install/5
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
         // POST: api/Install
         public HttpResponseMessage Post([FromBody]OAuthRes value)
@@ -74,14 +74,14 @@ namespace AtAddon.Controllers
         }
         
         
-        // PUT: api/Install/5
-        public void Put([FromBody]string value)
-        {
-        }
+        //// PUT: api/Install/5
+        //public void Put([FromBody]string value)
+        //{
+        //}
 
-        // DELETE: api/Install/5
-        public void Delete(int id)
-        {
-        }
+        //// DELETE: api/Install/5
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

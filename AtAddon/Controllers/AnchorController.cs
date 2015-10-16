@@ -11,18 +11,18 @@ namespace AtAddon.Controllers
 {
     public class AnchorController : ApiController
     {
-        // GET: api/Anchor
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        //// GET: api/Anchor
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
-        // GET: api/Anchor/5
-        public string Get(int roomid)
-        {
+        //// GET: api/Anchor/5
+        //public string Get(int roomid)
+        //{
 
-            return "value";
-        }
+        //    return "value";
+        //}
 
         // POST: api/Anchor
         public void Post([FromBody]dynamic value)
@@ -70,14 +70,14 @@ namespace AtAddon.Controllers
             }
         }
 
-        // PUT: api/Anchor/5
-        public void Put([FromBody]string value)
-        {
-        }
+        //// PUT: api/Anchor/5
+        //public void Put([FromBody]string value)
+        //{
+        //}
 
-        // DELETE: api/Anchor/5
-        public void Delete(int id)
-        {
-        }
+        //// DELETE: api/Anchor/5
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

@@ -13,7 +13,7 @@ namespace AtAddon.Utility
     {
         public static void StartProcessingHistory(HipchatClient c, string roomName, string roomid, string auth)
         {
-            var response = c.ViewRoomHistory(roomName, "recent", "UTC", 0, 1000);
+            var response = c.ViewRoomHistory(roomName, "recent", "UTC", 0, 200);
             var ttt = response.Items.ToString();
             string jsonStr = JsonConvert.SerializeObject(response.Items);
 

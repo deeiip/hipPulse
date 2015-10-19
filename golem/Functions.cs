@@ -87,6 +87,7 @@ namespace golem
                     enString+= item.type.ToString() + ", ";
                     i++;
                 }
+
                 enString = enString.Trim(',');
                 i = 0;
                 foreach (var item in con.concepts)

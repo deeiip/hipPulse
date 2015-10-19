@@ -10,6 +10,7 @@ using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
 using System.Text.RegularExpressions;
 using HipchatApiV2;
+using Newtonsoft.Json;
 
 namespace golem
 {
@@ -72,7 +73,42 @@ namespace golem
                     prevCache["time_stamp"] = t_stamp;
                     dataCache.UpdateItem(prevCache);
                 }
-                string mess = string.Format("I've refreshed the report. Find your detailed report  <a href=http://hipchatimpulse.azurewebsites.net/visualize?roomid={0}> here </a>", roomId);
+                dynamic ent = JsonConvert.DeserializeObject(fix);
+                dynamic con = JsonConvert.DeserializeObject(fixJack);
+                dynamic key = JsonConvert.DeserializeObject(fixMagic);
+                int i = 0;
+                string enString = "Top Entities: ";
+                string conString = "Top Concepts: ";
+                string keyString = "Top Keywords: ";
+                foreach (var item in ent.entities)
+                {
+                    if (i > 3)
+                        break;
+                    enString+= item.type.ToString() + ",";
+                    i++;
+                }
+                enString = enString.Trim(',');
+                i = 0;
+                foreach (var item in con.concepts)
+                {
+                    if (i > 3)
+                        break;
+                    conString += item.text.ToString() + ",";
+                    i++;
+                }
+                conString = conString.Trim(',');
+                i = 0;
+                foreach (var item in key.keywords)
+                {
+                    if (i > 3)
+                        break;
+                    keyString += item.text.ToString() + ", ";
+                    i++;
+                }
+                keyString = keyString.Trim(',');
+                string mess = string.Format(@"I've refreshed the report. <br> "+ enString+ 
+                        "<br>"+ conString +"<br>" + keyString +
+                        "<br> Find your detailed report <a href=http://hipchatimpulse.azurewebsites.net/visualize?roomid={0}> here </a>", roomId);
                 HipchatClient c = new HipchatClient(authToken);
                 c.SendNotification(roomId, new HipchatApiV2.Requests.SendRoomNotificationRequest() {
                     Message = mess, MessageFormat = HipchatApiV2.Enums.HipchatMessageFormat.Html 

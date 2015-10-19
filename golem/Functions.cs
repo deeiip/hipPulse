@@ -107,8 +107,8 @@ namespace golem
                     i++;
                 }
                 keyString = keyString.Trim(',');
-                string mess = string.Format(@"I've refreshed the report. <br> "+ enString+ 
-                        "<br>"+ conString +"<br>" + keyString +
+                string mess = string.Format(@"I've refreshed the report. <br> "+  conString+
+                        "<br>" + enString + "<br>" + keyString +
                         "<br> Find your detailed report <a href=http://hipchatimpulse.azurewebsites.net/visualize?roomid={0}> here </a>", roomId);
                 HipchatClient c = new HipchatClient(authToken);
                 c.SendNotification(roomId, new HipchatApiV2.Requests.SendRoomNotificationRequest() {

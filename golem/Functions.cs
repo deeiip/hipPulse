@@ -84,7 +84,7 @@ namespace golem
                 {
                     if (i > 3)
                         break;
-                    enString+= item.type.ToString() + ",";
+                    enString+= item.type.ToString() + ", ";
                     i++;
                 }
                 enString = enString.Trim(',');
@@ -93,7 +93,7 @@ namespace golem
                 {
                     if (i > 3)
                         break;
-                    conString += item.text.ToString() + ",";
+                    conString += item.text.ToString() + ", ";
                     i++;
                 }
                 conString = conString.Trim(',');

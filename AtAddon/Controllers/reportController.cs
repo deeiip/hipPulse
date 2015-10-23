@@ -74,7 +74,6 @@ namespace AtAddon.Controllers
                         };
                     }
                     break;
-
             }
             return JsonConvert.SerializeObject(new { status = "UNKNOWN_ERROR" });
         }

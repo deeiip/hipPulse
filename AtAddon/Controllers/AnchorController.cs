@@ -61,7 +61,7 @@ namespace AtAddon.Controllers
                             c.SendNotification(roomId, new HipchatApiV2.Requests.SendRoomNotificationRequest()
                             {
                                 Message
-                                    = message
+                                    = string.Format("Find your detailed report <a href=http://hipchatimpulse.azurewebsites.net/visualize?roomid={0}> here </a>", roomId)
                             });
                         }
                     }

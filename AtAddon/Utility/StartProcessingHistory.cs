@@ -19,12 +19,20 @@ namespace AtAddon.Utility
 
             using (var context = new Models.ChimeraEntities())
             {
+                string mes;
                 var res = context.MESSAGE_STORE.Where(x => x.RoomName == roomid).Select(x=>x.Id).ToArray();
                 var currentMessageIds = response.Items.ToArray();
                 var newMessages = currentMessageIds.Where(x => !res.Contains(x.Id));
                 foreach (var item in newMessages)
                 {
-
+                    if(item.Message.Length > 900)
+                    {
+                        mes = item.Message.Substring(0, 900);
+                    }
+                    else
+                    {
+                        mes = item.Message;
+                    }
                     if(item.From.Trim()== "HipPulse" || item.Message == "/report" || 
                         item.From.Trim().ToLower().Contains("Summary For HipChat".ToLower()))
                     {
@@ -47,7 +55,7 @@ namespace AtAddon.Utility
                         From = item.From.ToString().Trim(),
                         Id = item.Id,
                         Links = JsonConvert.SerializeObject(item.Links),
-                        Message = item.Message,
+                        Message = mes,
                         MessageFormat = (int)item.MessageFormat,
                         Type = (int)item.Type,
                         RoomName = roomid
@@ -72,7 +80,7 @@ namespace AtAddon.Utility
                 }
                 catch(Exception ex)
                 {
-                    throw new Exception("Can not save to db", ex);
+                    //throw new Exception("Can not save to db", ex);
                 }
             }
         }

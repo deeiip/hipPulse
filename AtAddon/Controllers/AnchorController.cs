@@ -61,7 +61,7 @@ namespace AtAddon.Controllers
                             c.SendNotification(roomId, new HipchatApiV2.Requests.SendRoomNotificationRequest()
                             {
                                 Message
-                                    = "There was some error processing your request. Don't worry we'd do our part. In the meantime we'd ask you to please hit /report once again"
+                                    = message
                             });
                         }
                     }

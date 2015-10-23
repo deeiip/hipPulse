@@ -51,7 +51,7 @@ namespace AtAddon.Utility
                     {
                         Color_ = (int)item.Color,
                         Date = item.Date.ToString(),
-                        File = file,
+                        File = "",
                         From = "",
                         Id = item.Id,
                         Links = ""  ,

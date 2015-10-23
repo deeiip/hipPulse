@@ -82,6 +82,10 @@ $.get(url, function (data) {
     var entityFreq = [];
     for (var i = 0; i < entities.length; i++)
     {
+        if (entities[i].type == "TwitterHandle")
+        {
+            entities[i].type = "HipChat Handle";
+        }
         if(entities[i].type in entityTypeFreq)
         {
             entityTypeFreq[entities[i].type] += parseInt( entities[i].count, 10);

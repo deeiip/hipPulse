@@ -116,7 +116,8 @@ $.get(url, function (data) {
     ops = $("#cat1-drop").children();
     if (ops.length < 2)
     {
-        $('#cat2-drop').val(ops[0].value)
+        $('#cat2-drop').val(ops[0].value);
+        ops[1] = ops[0];
     }
     else
     {

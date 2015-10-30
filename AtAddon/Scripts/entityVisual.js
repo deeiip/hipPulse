@@ -118,6 +118,7 @@ $.get(url, function (data) {
     {
         $('#cat2-drop').val(ops[0].value)
     }
+    else
     {
         $('#cat2-drop').val(ops[1].value);
 

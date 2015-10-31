@@ -18,7 +18,7 @@ namespace AtAddon.Controllers
             using (var context = new Models.ChimeraEntities())
             {
                 var res = from m in context.MESSAGE_STORE where m.RoomName == name.Trim() select m.Message;
-                foreach (var item in res)
+                foreach (var item in res.Take(150))
                 {
                     ret.AppendLine(item.Trim());
                 }
